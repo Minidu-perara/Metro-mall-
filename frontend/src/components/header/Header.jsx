@@ -1,7 +1,6 @@
 import React from 'react';
 import "./header.css";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { height } from '@mui/system';
 
 function Header() {
   return (
@@ -10,7 +9,7 @@ function Header() {
         <h1>METRO MALL</h1>
       </div>
       <div> 
-      <AccountCircleIcon style={{ fontSize: 40, width: 40, height: 40 }}/>
+      <AccountCircleIcon style={{ fontSize: 35, width: 35, height: 35 }}/>
       </div>
     </div>
   )
