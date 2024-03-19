@@ -10,6 +10,8 @@ import NotFound from "./pages/notFound/NotFound"
 import Items from "./pages/ItemsPage/Items/Items"
 import SOhome from "./pages/ShopOwnerDashboard/SODashboardHome/SOhome";
 import SOItems from "./pages/ShopOwnerDashboard/ItemsPage/Items/SOItems"
+import SOPreorders from "./pages/ShopOwnerDashboard/SOPreorders/sopreorders/SOPreorders";
+import SOCompleteOrders from "./pages/ShopOwnerDashboard/SOCompleteorders/SOCompleteOrders";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/admin-dashboard" element={<DashboardLayout />} />
         <Route path="/shopowner-dashboard" element={<SDashboardLayout component={<SOhome />} />} />
         <Route path="/shopowner-dashboard/items" element={<SDashboardLayout component={<SOItems />} />} />
+        <Route path="/shopowner-dashboard/preorders" element={<SDashboardLayout component={<SOPreorders />} />} />
+        <Route path="/shopowner-dashboard/complete-orders" element={<SDashboardLayout component={<SOCompleteOrders />} />} />
         <Route path="/my-preorders" element={<Preorder/>} />
         <Route path="/items-page" element={<Items/>} />
         {/* not found */}

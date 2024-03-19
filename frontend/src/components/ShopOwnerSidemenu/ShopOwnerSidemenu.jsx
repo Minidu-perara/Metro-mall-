@@ -20,12 +20,12 @@ export const SidemenuData = [
   {
     title: "Pre Orders",
     icon: <ShoppingBagSharpIcon />,
-    link: "/stores",
+    link: "/shopowner-dashboard/preorders",
   },
   {
     title: "Complete Orders",
     icon: <AssignmentTurnedInSharpIcon />,
-    link: "/shopOwners",
+    link: "/shopowner-dashboard/complete-orders",
   },
 ];
 
