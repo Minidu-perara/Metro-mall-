@@ -15,7 +15,7 @@ export const SidemenuData = [
   {
     title: "Items",
     icon: <LocalMallIcon />,
-    link: "/customer",
+    link: "/shopowner-dashboard/items",
   },
   {
     title: "Pre Orders",

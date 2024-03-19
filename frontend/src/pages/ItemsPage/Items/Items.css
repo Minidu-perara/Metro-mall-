@@ -9,10 +9,12 @@
   color: #052d55;
 }
 
-.items-search input {
+.items-page .items-search input {
   height: 40px;
   width: 350px;
   margin-left: 100px;
+  border: 0.2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .items-page .all-items {

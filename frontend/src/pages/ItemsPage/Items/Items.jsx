@@ -7,7 +7,7 @@ function Items() {
     <div className="items-page">
       <h2>BURGER KING</h2>
       <div className="items-search">
-        <input type="text" placeholder="search" />
+        <input type="text" placeholder="Search" />
       </div>
       <div className="all-items">
         <Item />
