@@ -1,0 +1,101 @@
+.sohome {
+  margin-top: 80px;
+  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-row {
+  display: flex;
+  gap: 90px;
+}
+
+.second-row {
+  display: flex;
+  gap: 90px;
+}
+
+.first-card {
+  display: flex;
+  gap: 30px;
+  background-color: #d9d9d9;
+  width: 430px;
+  height: 150px;
+  border: none;
+  border-radius: 10px;
+}
+
+.first-card img {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.first-card-details {
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.first-card-details p {
+  font-size: 23px;
+  color: black;
+  font-weight: bold;
+}
+
+.second-card {
+  display: flex;
+  gap: 30px;
+  background-color: #d9d9d9;
+  width: 430px;
+  height: 150px;
+  border: none;
+  border-radius: 10px;
+}
+
+.second-card img {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.second-card-details {
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.second-card-details p {
+  font-size: 23px;
+  color: black;
+  font-weight: bold;
+}
+
+.third-card {
+  display: flex;
+  gap: 30px;
+  background-color: #d9d9d9;
+  width: 430px;
+  height: 150px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 80px;
+  margin-left: 120px;
+}
+
+.third-card img {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.third-card-details p {
+  font-size: 23px;
+  color: black;
+  font-weight: bold;
+}
+
+.third-card-details {
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.pichart {
+  margin-top: 40px;
+  margin-left: 60px;
+}
