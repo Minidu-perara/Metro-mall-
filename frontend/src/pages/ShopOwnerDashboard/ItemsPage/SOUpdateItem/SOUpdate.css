@@ -1,0 +1,80 @@
+.SOUpdate {
+  margin-top: 30px;
+  margin-left: 300px;
+}
+
+.topi {
+  text-align: center;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.in-sec {
+  display: flex;
+  flex-direction: column;
+}
+
+.in-sec input {
+  height: 50px;
+  width: 500px;
+  border: 0.2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.file-sec {
+  border: 0.2px solid rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+  width: 350px;
+}
+
+.upld-btn button {
+  background-color: white;
+  border: 1px solid #34c800;
+  color: #34c800;
+  font-weight: 600;
+  height: 50px;
+  width: 100px;
+}
+
+.img-upld {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.img-view {
+  display: flex;
+  gap: 300px;
+  border: 0.2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  align-items: center;
+  height: 100px;
+}
+
+.dlt-btn button {
+  background-color: white;
+  color: #e50000;
+  font-weight: 500;
+  border: none;
+}
+
+.img-p img {
+  height: auto;
+  width: 100px;
+}
+
+.upd-btnn button {
+  background-color: #334155;
+  color: white;
+  font-weight: 500;
+  height: 50px;
+  width: 500px;
+  border: none;
+  border-radius: 5px;
+}
