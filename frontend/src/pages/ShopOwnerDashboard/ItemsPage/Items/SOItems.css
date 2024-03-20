@@ -8,6 +8,7 @@
   gap: 600px;
   margin-top: 20px;
   margin-left: 30px;
+  align-items: center;
 }
 
 .SOItems .srch-export {
