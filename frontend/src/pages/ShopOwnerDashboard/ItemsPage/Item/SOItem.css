@@ -25,7 +25,20 @@
   gap: 20px;
 }
 
-.SOItem .item-btns button {
+.SOItem .item-btns a {
+  background-color: #0b711c;
+  height: 50px;
+  width: 100px;
+  color: white;
+  font-weight: 600;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 14px;
+}
+
+.SOItem .dlt-btn {
   height: 50px;
   width: 100px;
   border: none;
@@ -33,12 +46,5 @@
   color: white;
   font-weight: 600;
   margin-top: 30px;
-}
-
-.SOItem .upd-btn {
-  background-color: #0b711c;
-}
-
-.SOItem .dlt-btn {
   background-color: #b00f0f;
 }

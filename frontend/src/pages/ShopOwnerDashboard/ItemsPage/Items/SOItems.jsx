@@ -1,13 +1,14 @@
 import React from 'react'
 import "./SOItems.css"
 import SOItem from "../Item/SOItem"
+import { Link } from "react-router-dom";
 
 function SOItems() {
   return (
     <div className='SOItems'>
       <div className="head-section">
         <div className="add-btn">
-          <button>Add Items</button>
+          <Link to="/shopowner-dashboard/add-items">Add Items</Link>
         </div>
         <div className="srch-export">
           <input type='text' placeholder='Search'/>

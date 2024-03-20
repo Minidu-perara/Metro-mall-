@@ -12,6 +12,8 @@ import SOhome from "./pages/ShopOwnerDashboard/SODashboardHome/SOhome";
 import SOItems from "./pages/ShopOwnerDashboard/ItemsPage/Items/SOItems"
 import SOPreorders from "./pages/ShopOwnerDashboard/SOPreorders/sopreorders/SOPreorders";
 import SOCompleteOrders from "./pages/ShopOwnerDashboard/SOCompleteorders/SOCompleteOrders";
+import SOAddItem from "./pages/ShopOwnerDashboard/ItemsPage/SOAddItem/SOAddItem";
+import SOUpdate from "./pages/ShopOwnerDashboard/ItemsPage/SOUpdateItem/SOUpdate";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/shopowner-dashboard/items" element={<SDashboardLayout component={<SOItems />} />} />
         <Route path="/shopowner-dashboard/preorders" element={<SDashboardLayout component={<SOPreorders />} />} />
         <Route path="/shopowner-dashboard/complete-orders" element={<SDashboardLayout component={<SOCompleteOrders />} />} />
+        <Route path="/shopowner-dashboard/add-items" element={<SDashboardLayout component={<SOAddItem />} />} />
+        <Route path="/shopowner-dashboard/update-items" element={<SDashboardLayout component={<SOUpdate />} />} />
         <Route path="/my-preorders" element={<Preorder/>} />
         <Route path="/items-page" element={<Items/>} />
         {/* not found */}

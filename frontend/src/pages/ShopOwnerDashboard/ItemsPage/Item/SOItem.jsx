@@ -1,5 +1,6 @@
 import React from 'react'
 import "./SOItem.css"
+import { Link } from 'react-router-dom'
 
 function SOItem() {
   return (
@@ -10,7 +11,7 @@ function SOItem() {
           <p>RS 1500.00</p>
         </div>
         <div className="item-btns">
-          <button className='upd-btn'>UPDATE</button>
+          <Link to="/shopowner-dashboard/update-items" className='upd-btn'>UPDATE</Link>
           <button className='dlt-btn'>DELETE</button>
         </div>
       </div>

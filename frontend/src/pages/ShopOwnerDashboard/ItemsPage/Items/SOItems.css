@@ -15,12 +15,11 @@
   gap: 20px;
 }
 
-.SOItems .add-btn button {
+.SOItems .add-btn a {
   background-color: #ffd700;
   color: #031144;
   font-weight: bold;
-  height: 40px;
-  width: 100px;
+  padding: 15px;
   border: none;
   border-radius: 5px;
 }
