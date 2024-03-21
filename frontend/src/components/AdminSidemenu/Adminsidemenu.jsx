@@ -9,7 +9,7 @@ export const SidemenuData = [
   {
     title: "Dashboard",
     icon: <HomeIcon />,
-    link: "/dashboard",
+    link: "/admindashboard",
   },
 
   {
@@ -20,7 +20,7 @@ export const SidemenuData = [
   {
     title: "Stores",
     icon: <StoreIcon />,
-    link: "/stores",
+    link: "/admindashboard/stores",
   },
   {
     title: "Shop Owners",
