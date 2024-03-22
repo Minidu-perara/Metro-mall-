@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/header/Header";
 import DashboardLayout from "./pages/AdminDashboard/DashboardLayout";
 import About from "./pages/about/About";
+import AdminHeader from "./components/AdminHeader/AdminHeader"
 import Footer from "./components/Footer/Footer";
 import './App.css';
 import DashboardHome from "./pages/AdminDashboard/DashboardHome/DashboardHome";
@@ -12,10 +12,11 @@ import FoodBeverages from "./pages/FoodBeveragesPage/FoodBeverages";
 import FoodDescription from "./pages/FoodBeveragesPage/FoodDescription";
 
 
+
 function App() {
   return (
     <div>
-      <Header/>
+      <AdminHeader/>
       <Routes>
         <Route path="/admindashboard" element={<DashboardLayout component={<DashboardHome />} />} />
         <Route path="/admindashboard/stores" element={<DashboardLayout component={<Stores />} />} />
