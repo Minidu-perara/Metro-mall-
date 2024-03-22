@@ -16,7 +16,7 @@
   
   .adhome .second-row {
     display: flex;
-    gap: 450px;
+    gap: 300px;
   }
   
   .adhome .first-card {
@@ -87,14 +87,14 @@
   
   .adhome .third-card {
     display: flex;
-    gap: 30px;
+    gap: 10px;
     background-color: #334a9b70;
     width: 430px;
     height: 150px;
     border: none;
     border-radius: 10px;
     margin-top: 80px;
-    margin-left: 120px;
+    /* margin-left: 120px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(86, 82, 82, 0.19);
   }
 
@@ -122,7 +122,7 @@
   
   .adhome .pichart {
     margin-top: 40px;
-    margin-left: 60px;
+    margin-left: 90px;
   }
   
    

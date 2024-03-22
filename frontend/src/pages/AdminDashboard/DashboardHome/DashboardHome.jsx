@@ -1,5 +1,6 @@
 import React from "react";
 import "./DashboardHome.css";
+import Piechart from "./Piechart/Piechart";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StoreIcon from "@mui/icons-material/Store";
 
@@ -39,7 +40,9 @@ const DashboardHome = () => {
 
       {/* second row */}
       <div className="second-row">
-        <div className="pichart"></div>
+        <div className="pichart">
+          <Piechart />
+        </div>
 
         <div className="third-card">
           <div className="thirdcard-img">
