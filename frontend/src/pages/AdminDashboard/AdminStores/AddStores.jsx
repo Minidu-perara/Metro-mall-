@@ -12,31 +12,33 @@ const AddStores = () => {
     const [description,setDescription] = useState('');
 
     const submit = async (e) => {
-      
-        e.preventDefault();
-
-        try{
-            const newStore = {
-                storeName: storeName,
-                location: location,
-                category: category,
-                description: description
-            }
-
-            
-            await axios.post("/api/store/create",newStore)
-            .then(() => {
-                alert("Store is created");
-            }).catch((err) => {
-                console.log("error occured", err);
-            });
-
-
-        }catch(e){
-            console.log(e);
+      e.preventDefault();
+    
+      try {
+        const newStore = {
+          storeName: storeName,
+          location: location,
+          category: category,
+          description: description,
+        };
+    
+        const response = await axios.post("/api/store/create", newStore);
+       
+        if (response.status === 200) {
+          alert("Store is created");
+          
+          setStoreName("");
+          setLocation("");
+          setCategory("");
+          setDescription("");
+        } else {
+          console.error("Unexpected response status:", response.status);
         }
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
     };
-
+    
   return (
     
     <form className="addstoreform">
