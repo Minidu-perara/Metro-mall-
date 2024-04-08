@@ -22,7 +22,7 @@ function App() {
         <Route path="/admindashboard/stores/add" element={<DashboardLayout component={<AddStores />} />} />
         <Route path="/admindashboard/stores/update/:id" element={<DashboardLayout component={<UpdateStores />} />} />
         <Route path="/foodbeverages" element={<FoodBeverages/>} />
-        <Route path="/fooddescription" element={<FoodDescription/>} />
+        <Route path="/fooddescription/:id" element={<FoodDescription/>} />
       </Routes>
      <AdminFooter/>
     </div>

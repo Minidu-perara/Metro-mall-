@@ -1,97 +1,110 @@
-import { useState } from "react";
-import React  from 'react';
+import React, { useState } from "react";
 import axios from "axios";
 import "./AddStores.css";
 
-
 const AddStores = () => {
-  
-    const [storeName,setStoreName] = useState('');
-    const [location,setLocation] = useState('');
-    const [category,setCategory] = useState('');
-    const [description,setDescription] = useState('');
+  const [storeName, setStoreName] = useState("");
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [storeImage, setStoreImage] = useState("");
 
-    const submit = async (e) => {
-      e.preventDefault();
-    
-      try {
-        const newStore = {
-          storeName: storeName,
-          location: location,
-          category: category,
-          description: description,
-        };
-    
-        const response = await axios.post("/api/store/create", newStore);
-       
-        if (response.status === 200) {
-          alert("Store is created");
-          
-          setStoreName("");
-          setLocation("");
-          setCategory("");
-          setDescription("");
-        } else {
-          console.error("Unexpected response status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error occurred:", error);
-      }
-    };
-    
+  const handleFileChange = (e) => {
+    setStoreImage(e.target.files[0]);
+  };
+
+  const addStore = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData();
+      formData.append("storeName", storeName);
+      formData.append("location", location);
+      formData.append("category", category);
+      formData.append("description", description);
+      formData.append("storeImage", storeImage);
+
+      const response = await axios.post("/api/store/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setStoreName("");
+      setLocation("");
+      setCategory("");
+      setDescription("");
+      setStoreImage("");
+      
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  };
+
   return (
-    
-    <form className="addstoreform">
+    <form className="addstoreform" encType="multipart/form-data">
       <div>
-        <label className="addstorelable">
-          Store Name:
-        </label>
+        <label className="addstorelable">Store Name:</label>
         <input
           className="storeinput"
           type="text"
-          name="storeName"
-          onChange={(e) => {setStoreName(e.target.value)}}
+          value={storeName}
+          onChange={(e) => setStoreName(e.target.value)}
           required
         />
       </div>
       <div>
-        <label className="addstorelable">
-          Location:
-        </label>
+        <label className="addstorelable">Location:</label>
         <input
           className="storeinput"
           type="text"
-          name="location"
-          onChange={(e) => {setLocation(e.target.value)}}
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
           required
         />
       </div>
       <div>
-        <label className="addstorelable">
-          Category:
-        </label>
+        <label className="addstorelable">Category:</label>
         <select
           className="storeinputselect"
-          name="category"
-          onChange={(e) => {setCategory(e.target.value)}}
-          required>
-          <option value="Select Category" disabled>Select Category</option>
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        >
+          <option value="Select Category" disabled>
+            Select Category
+          </option>
           <option value="Food and Beverages">Food and Beverages</option>
-          <option value="Fashion and Accessories">Fashion and Accessories</option>
+          <option value="Fashion and Accessories">
+            Fashion and Accessories
+          </option>
           <option value="Beauty and Wellness">Beauty and Wellness</option>
         </select>
       </div>
       <div>
-        <label className="addstorelable">
-          Description:
-        </label>
+        <label className="addstorelable">Description:</label>
         <textarea
           className="storeinputtextarea"
-          name="description"
-          onChange={(e) => {setDescription(e.target.value)}}
-          required></textarea>
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        ></textarea>
       </div>
-      <button onClick={submit} className="addstorebutton" type="submit">
+      <div>
+        <label className="addstorelable">Store Image:</label>
+        <input
+          className="storeinputfile"
+          type="file"
+          filename="storeImage"
+          onChange={handleFileChange}
+          required
+        />
+      </div>
+      <button
+        onClick={addStore}
+        className="addstorebutton"
+        type="submit"
+      >
         Create Store
       </button>
     </form>

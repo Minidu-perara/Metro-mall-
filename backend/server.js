@@ -6,6 +6,7 @@ const app = express();
 require("dotenv").config();
 const {connectDB} = require("./utils/connection");
 
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

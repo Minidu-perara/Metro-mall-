@@ -1,86 +1,83 @@
-import React from "react";
-import bk from "../../images/buregrking.jpeg";
-import mac from "../../images/macdonalds.jpeg";
-import kfc from "../../images/kfc.jpeg";
-import subway from "../../images/subway.jpeg";
-import pizzahut from "../../images/pizzahut.jpeg";
-import teatung from "../../images/teatung.jpeg";
-import creeprunner from "../../images/creeprunner.jpeg";
-import bubbleme from "../../images/bubbleme.jpeg";
-import magiccorn from "../../images/magiccorn.jpeg";
-import wafel from "../../images/wafel.jpeg";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./FoodBeverages.css";
 import { Link } from "react-router-dom";
 
 const FoodBeverages = () => {
+  const [search, setSearch] = useState("");
+  const [storeData, setStoreData] = useState([]);
+  const [filteredStoreData, setFilteredStoreData] = useState([]);
+
+  //getAllStores
+  useEffect(() => {
+    const getStores = async () => {
+      try {
+        axios.get("/api/store/getAllStores").then((res) => {
+          console.log(res.data.message);
+          setStoreData(res.data.allstores);
+          setFilteredStoreData(res.data.allstores);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getStores();
+  }, []);
+
+  //searchFucntion
+  useEffect(() => {
+    const result = storeData.filter((filterstore) => {
+      return (
+        filterstore.storeName.toLowerCase().match(search.toLowerCase()) ||
+        filterstore.location.toLowerCase().match(search.toLowerCase()) ||
+        filterstore.category.toLowerCase().match(search.toLowerCase())
+      );
+    });
+
+    setFilteredStoreData(result);
+  }, [search]);
+
   return (
-    <div>
-      <div
+    <div className="foodandbeverages">
+      <h2
         style={{
-          height: 180,
-          textAlign: "center",
-          padding: 80,
           fontFamily: "calibri",
-          color:"#031144",
-          fontStyle:"bold"
+          marginTop: 50,
+          marginLeft: 830,
+          fontSize: 32,
+          fontWeight: 400,
+          color: "#031144",
         }}>
-        <h1>FOOD AND BEVERAGES</h1>
-      </div>
+        STORE DIRECTORIES
+      </h2>
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search"
+        style={{
+          fontFamily: "calibri",
+          fontSize: 22,
+          padding: 10,
+          marginTop: 40,
+          marginLeft: 1480,
+          width: 330,
+          height: 50,
+          borderRadius: 5,
+          borderColor: "#D9D9D9",
+          backgroundColor: "#D9D9D9",
+        }}></input>
+
       <div className="cardContainer">
-      <Link to={'/fooddescription'}>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={bk} />
+        {filteredStoreData.map((store) => (
+          <Link to={`/fooddescription/${store._id}`}>
+          <div className="card">
+            <div className="imageContainer">
+              <img src={`/uploads/${store.storeImage}`} />
+            </div>
           </div>
-        </div>
-        </Link>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={mac} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={kfc} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={subway} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={pizzahut} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={teatung} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={bubbleme} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={magiccorn} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={creeprunner} />
-          </div>
-        </div>
-        <div className="card">
-          <div className="imageContainer">
-            <img src={wafel} />
-          </div>
-        </div>
+          </Link>
+        ))}
       </div>
-      <br/><br/><br/><br/>
     </div>
   );
 };

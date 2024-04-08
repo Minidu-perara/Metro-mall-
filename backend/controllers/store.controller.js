@@ -1,30 +1,34 @@
 const Store = require("../models/store.model");
+const upload = require('../middleware/uploadMiddleware');
 
-//create store
-const create = async (req,res) => {
-    try{
+// Create store
+const create = async (req, res) => {
+    try {
+        const { storeName, location, category, description } = req.body;
 
-        const {storeName, location, category, description} = req.body;
+        // Retrieve the file path from req.file
+        const storeImage = req.file.originalname;
+        
 
-        const newStore = {
+        const newStore = new Store({
             storeName: storeName,
             location: location,
             category: category,
-            description: description
-        }
+            description: description,
+            storeImage: storeImage // Assign the storeImage path to the store
+        });
 
-        const newstore = new Store(newStore);
-        await newstore.save();
+        await newStore.save();
 
         return res.status(200).send({
             status: true,
-            message:"store created successfully"
+            message: "Store created successfully"
         });
 
-    }catch(err){
+    } catch (err) {
         return res.status(500).send({
-            status:false,
-            message:err.message
+            status: false,
+            message: err.message
         });
     }
 };
