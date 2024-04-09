@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {toast} from 'react-toastify';
+
 import "./UpdateStores.css";
 
 const UpdateStores = () => {
@@ -49,7 +51,7 @@ const UpdateStores = () => {
           description,
         });
       }
-      alert("Data is updated 🤩");
+      toast.success("Store is updated 🤩");
     } catch (err) {
       console.log(err);
     }

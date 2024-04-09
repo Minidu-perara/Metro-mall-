@@ -7,6 +7,7 @@ import StoreIcon from "@mui/icons-material/Store";
 const DashboardHome = () => {
   return (
     <div className="adhome">
+    
       {/* first row */}
       <div className="first-row">
         <div className="first-card">

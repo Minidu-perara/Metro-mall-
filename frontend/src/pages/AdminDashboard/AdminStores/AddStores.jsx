@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddStores.css";
+import {toast} from 'react-toastify';
+
 
 const AddStores = () => {
   const [storeName, setStoreName] = useState("");
@@ -8,14 +10,51 @@ const AddStores = () => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [storeImage, setStoreImage] = useState("");
- 
+  const [formErrors, setFormErrors] = useState({});
 
   const handleFileChange = (e) => {
     setStoreImage(e.target.files[0]);
   };
 
+  const validateForm = () => {
+    let errors = {};
+    let formIsValid = true;
+
+    if (!storeName) {
+      formIsValid = false;
+      errors["storeName"] = "Please enter store name";
+    }
+
+    if (!location) {
+      formIsValid = false;
+      errors["location"] = "Please enter location";
+    }
+
+    if (!category || category === "Select Category") {
+      formIsValid = false;
+      errors["category"] = "Please select a category";
+    }
+
+    if (!description) {
+      formIsValid = false;
+      errors["description"] = "Please enter description";
+    }
+
+    if (!storeImage) {
+      formIsValid = false;
+      errors["storeImage"] = "Please select a store image";
+    }
+
+    setFormErrors(errors);
+    return formIsValid;
+  };
+
   const addStore = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -36,7 +75,9 @@ const AddStores = () => {
       setCategory("");
       setDescription("");
       setStoreImage("");
-      
+      setFormErrors({}); 
+      toast.success("Store added successfully 👌");
+
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -53,6 +94,7 @@ const AddStores = () => {
           onChange={(e) => setStoreName(e.target.value)}
           required
         />
+        <div className="error">{formErrors["storeName"]}</div>
       </div>
       <div>
         <label className="addstorelable">Location:</label>
@@ -63,6 +105,7 @@ const AddStores = () => {
           onChange={(e) => setLocation(e.target.value)}
           required
         />
+        <div className="error">{formErrors["location"]}</div>
       </div>
       <div>
         <label className="addstorelable">Category:</label>
@@ -70,8 +113,7 @@ const AddStores = () => {
           className="storeinputselect"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          required
-        >
+          required>
           <option value="Select Category" disabled>
             Select Category
           </option>
@@ -81,6 +123,7 @@ const AddStores = () => {
           </option>
           <option value="Beauty and Wellness">Beauty and Wellness</option>
         </select>
+        <div className="error">{formErrors["category"]}</div>
       </div>
       <div>
         <label className="addstorelable">Description:</label>
@@ -88,8 +131,8 @@ const AddStores = () => {
           className="storeinputtextarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          required
-        ></textarea>
+          required></textarea>
+        <div className="error">{formErrors["description"]}</div>
       </div>
       <div>
         <label className="addstorelable">Store Image:</label>
@@ -100,13 +143,10 @@ const AddStores = () => {
           onChange={handleFileChange}
           required
         />
+        <div className="error">{formErrors["storeImage"]}</div>
       </div>
-      
-      <button
-        onClick={addStore}
-        className="addstorebutton"
-        type="submit"
-      >
+
+      <button onClick={addStore} className="addstorebutton" type="submit">
         Create Store
       </button>
     </form>

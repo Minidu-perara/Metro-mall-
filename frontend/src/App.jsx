@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "./pages/AdminDashboard/DashboardLayout";
 import AdminHeader from "./components/AdminHeader/AdminHeader";
-import './App.css';
 import DashboardHome from "./pages/AdminDashboard/DashboardHome/DashboardHome";
 import Stores from "./pages/AdminDashboard/AdminStores/AdminStores";
 import AddStores from "./pages/AdminDashboard/AdminStores/AddStores";
@@ -9,6 +8,12 @@ import UpdateStores from "./pages/AdminDashboard/AdminStores/UpdateStores";
 import FoodBeverages from "./pages/FoodBeveragesPage/FoodBeverages";
 import FoodDescription from "./pages/FoodBeveragesPage/FoodDescription";
 import AdminFooter from "./components/AdminFooter/AdminFooter";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import './App.css';
+
+
 
 
 
@@ -16,6 +21,7 @@ function App() {
   return (
     <div>
       <AdminHeader/>
+      <ToastContainer/>
       <Routes>
         <Route path="/admindashboard" element={<DashboardLayout component={<DashboardHome />} />} />
         <Route path="/admindashboard/stores" element={<DashboardLayout component={<Stores />} />} />

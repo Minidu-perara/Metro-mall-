@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./FoodBeverages.css";
 import { Link } from "react-router-dom";
+
+import "./FoodBeverages.css";
 
 const FoodBeverages = () => {
   const [search, setSearch] = useState("");
@@ -53,7 +54,7 @@ const FoodBeverages = () => {
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search"
+        placeholder="Search..."
         style={{
           fontFamily: "calibri",
           fontSize: 22,
@@ -62,9 +63,7 @@ const FoodBeverages = () => {
           marginLeft: 1480,
           width: 330,
           height: 50,
-          borderRadius: 5,
-          borderColor: "#D9D9D9",
-          backgroundColor: "#D9D9D9",
+          borderRadius:1
         }}></input>
 
       <div className="cardContainer">

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./AdminStores.css";
+import {toast} from 'react-toastify';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+
+import "./AdminStores.css";
 import logo from "../../../images/pdflogo.png";
 
 const stores = () => {

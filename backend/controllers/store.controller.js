@@ -7,9 +7,19 @@ const create = async (req, res) => {
     try {
         const { storeName, location, category, description } = req.body;
 
+        // Check if store with the same name already exists
+        const existingStore = await Store.findOne({ storeName: storeName });
+
+        // If store already exists, return error
+        if (existingStore) {
+            return res.status(400).send({
+                status: false,
+                message: "Store with the same name already exists"
+            });
+        }
+
         // Retrieve the file path from req.file
         const storeImage = req.file.originalname;
-        
 
         const newStore = new Store({
             storeName: storeName,
@@ -33,6 +43,7 @@ const create = async (req, res) => {
         });
     }
 };
+
 
 //getAll stores
 const getAllStores = async (req,res) => {
