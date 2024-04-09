@@ -21,12 +21,10 @@ const storeSchema = new mongoose.Schema({
         trim:true,
         required:true
     },
-    //today change
     storeImage:{
         type:String,
         required:true
     },
-
 },
     {
         timestamps:true

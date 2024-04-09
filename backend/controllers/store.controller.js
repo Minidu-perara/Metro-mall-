@@ -1,6 +1,7 @@
 const Store = require("../models/store.model");
 const upload = require('../middleware/uploadMiddleware');
 
+
 // Create store
 const create = async (req, res) => {
     try {
@@ -15,7 +16,7 @@ const create = async (req, res) => {
             location: location,
             category: category,
             description: description,
-            storeImage: storeImage // Assign the storeImage path to the store
+            storeImage: storeImage,
         });
 
         await newStore.save();

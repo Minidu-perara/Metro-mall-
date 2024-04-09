@@ -1,25 +1,24 @@
 const multer = require('multer');
 
-// Multer storage configuration
+
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, '../frontend/public/uploads'); // Destination folder for storing uploaded files
+    callback(null, '../frontend/public/uploads');
   },
   filename: function (req, file, callback) {
-    callback(null,file.originalname); // Generate unique filename for uploaded files
+    callback(null,file.originalname);
   }
 });
 
-// Multer file filter configuration (allow only images)
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {
-    cb(null, true); // Accept the file
+    cb(null, true); 
   } else {
-    cb(new Error('Only images are allowed'), false); // Reject the file
+    cb(new Error('Only images are allowed'), false); 
   }
 };
 
-// Initialize multer middleware with configuration
+
 const upload = multer({ storage: storage});
 
 module.exports = upload;

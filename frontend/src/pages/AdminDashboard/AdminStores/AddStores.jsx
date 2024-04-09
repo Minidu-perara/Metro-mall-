@@ -8,6 +8,7 @@ const AddStores = () => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [storeImage, setStoreImage] = useState("");
+ 
 
   const handleFileChange = (e) => {
     setStoreImage(e.target.files[0]);
@@ -100,6 +101,7 @@ const AddStores = () => {
           required
         />
       </div>
+      
       <button
         onClick={addStore}
         className="addstorebutton"
