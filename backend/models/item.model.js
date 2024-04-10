@@ -18,10 +18,6 @@ const itemSchema = mongoose.Schema(
       type: Array,
       required: true,
     },
-    userRef: {
-      type: String,
-      required: true,
-    },
   },
 
   {

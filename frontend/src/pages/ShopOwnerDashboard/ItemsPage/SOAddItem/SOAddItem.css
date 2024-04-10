@@ -40,6 +40,7 @@
   font-weight: 600;
   height: 50px;
   width: 100px;
+  cursor: pointer;
 }
 
 .SOAddItem .img-upld {
@@ -57,16 +58,10 @@
   height: 100px;
 }
 
-.SOAddItem .dlt-btn button {
-  background-color: white;
-  color: #e50000;
-  font-weight: 500;
-  border: none;
-}
-
 .SOAddItem .img-p img {
   height: auto;
   width: 100px;
+  margin-left: 20px;
 }
 
 .SOAddItem .upd-btnn button {
@@ -77,4 +72,9 @@
   width: 500px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.SOAddItem .err-msg {
+  color: red;
 }
