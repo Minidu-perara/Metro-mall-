@@ -40,6 +40,7 @@
   font-weight: 600;
   height: 50px;
   width: 100px;
+  cursor: pointer;
 }
 
 .SOUpdate .img-upld {
@@ -62,11 +63,13 @@
   color: #e50000;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 }
 
 .SOUpdate .img-p img {
   height: auto;
   width: 100px;
+  margin-left: 20px;
 }
 
 .SOUpdate .upd-btnn button {
@@ -77,4 +80,9 @@
   width: 500px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.SOUpdate .err-msg {
+  color: red;
 }

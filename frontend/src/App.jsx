@@ -26,11 +26,11 @@ function App() {
         <Route path="/shopowner-dashboard/preorders" element={<SDashboardLayout component={<SOPreorders />} />} />
         <Route path="/shopowner-dashboard/complete-orders" element={<SDashboardLayout component={<SOCompleteOrders />} />} />
         <Route path="/shopowner-dashboard/add-items" element={<SDashboardLayout component={<SOAddItem />} />} />
-        <Route path="/shopowner-dashboard/update-items" element={<SDashboardLayout component={<SOUpdate />} />} />
+        <Route path="/shopowner-dashboard/update-items/:id" element={<SDashboardLayout component={<SOUpdate />} />} />
         <Route path="/my-preorders" element={<Preorder/>} />
         <Route path="/items-page" element={<Items/>} />
         {/* not found */}
-        <Route path="*" element={<NotFound/>} />
+        {/* <Route path="*" element={<NotFound/>} /> */}
       </Routes>
       <Footer />
     </div>

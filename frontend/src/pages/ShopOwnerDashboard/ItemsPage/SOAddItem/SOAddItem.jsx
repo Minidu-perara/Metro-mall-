@@ -9,6 +9,7 @@ import {
 } from "firebase/storage";
 import { app } from "../../../../firebase";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function SOAddItem() {
   const navigate = useNavigate();
@@ -106,6 +107,12 @@ function SOAddItem() {
         setError("All fields are required");
         return;
       }
+
+      if (isNaN(formData.price)) {
+        Swal.fire("Error!", "Price must be a valid number.", "error");
+        return;
+      }
+
       if (formData.imageUrls.length < 1)
         return setError("You must upload at least one image");
       setLoading(true);
@@ -118,7 +125,9 @@ function SOAddItem() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate("/shopowner-dashboard/items");
+      Swal.fire("Success!", "Your item has been added.", "success").then(() => {
+        navigate("/shopowner-dashboard/items");
+      });
     } catch (error) {
       setError(error.message);
       setLoading(false);
