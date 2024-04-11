@@ -77,6 +77,14 @@ function SOAddItem() {
     });
   };
 
+  const handleRemoveImage = (index, e) => {
+    e.preventDefault();
+    setFormData({
+      ...formData,
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+    });
+  };
+
   const handleChange = (e) => {
     {
       setFormData({
@@ -178,15 +186,23 @@ function SOAddItem() {
             </div>
           </div>
           <p className="err-msg">{imageUploadError && imageUploadError}</p>
-          <div className="img-view">
-            <div className="img-p">
-              <img src={formData.imageUrls} alt="" />
+          {formData.imageUrls.map((imageUrl, index) => (
+            <div className="img-view" key={index}>
+              <div className="img-p">
+                <img src={imageUrl} alt="" />
+              </div>
+              <div className="dlt-btn">
+                <button
+                  type="button"
+                  onClick={(e) => handleRemoveImage(index, e)}
+                >
+                  delete
+                </button>
+              </div>
             </div>
-          </div>
+          ))}
           <div className="upd-btnn">
-            <button type="submit" onClick={handleSubmit}>
-              Add Item
-            </button>
+            <button onClick={handleSubmit}>Add Item</button>
           </div>
           {error && <p className="err-msg">{error}</p>}
         </div>
