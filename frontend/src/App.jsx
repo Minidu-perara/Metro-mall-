@@ -30,7 +30,7 @@ function App() {
         <Route path="/my-preorders" element={<Preorder/>} />
         <Route path="/items-page" element={<Items/>} />
         {/* not found */}
-        {/* <Route path="*" element={<NotFound/>} /> */}
+        <Route path="*" element={<NotFound/>} />
       </Routes>
       <Footer />
     </div>

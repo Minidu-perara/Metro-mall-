@@ -5,6 +5,12 @@ const addPreOrder = async (req, res) => {
   try {
     const { status, itemId } = req.body;
 
+    const existingPreOrder = await PreOrder.findOne({ item: itemId});
+
+    if (existingPreOrder) {
+      return res.status(400).json({ message: "This item is already pre-ordered by the user" });
+    }
+
     const newPreOrder = await PreOrder.create({
       status,
       item: itemId,

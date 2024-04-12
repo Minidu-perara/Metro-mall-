@@ -10,6 +10,7 @@
 .preorder-item .po-image {
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 20px;
 }
 
 .preorder-item .po-texts {
@@ -42,4 +43,5 @@
   font-weight: 500;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 }
