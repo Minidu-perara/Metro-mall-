@@ -6,6 +6,7 @@ import axios from "axios";
 
 function SOItems() {
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     async function fetchItems() {
@@ -19,6 +20,16 @@ function SOItems() {
     fetchItems();
   }, []);
 
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    const filteredItems = items.filter((item) => {
+      return item.itemName.toLowerCase().includes(searchQuery);
+    });
+    setFilteredItems(filteredItems);
+  };
+
+  const itemsToDisplay = filteredItems.length > 0 ? filteredItems : items;
+
   return (
     <div className="SOItems">
       <div className="head-section">
@@ -26,13 +37,20 @@ function SOItems() {
           <Link to="/shopowner-dashboard/add-items">Add Items</Link>
         </div>
         <div className="srch-export">
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search"
+            name="searchQuery"
+            onChange={handleSearch}
+          />
           <button>Export</button>
         </div>
       </div>
       {/* body section */}
       <div className="body-sec">
-        {items && items.map((item) => <SOItem item={item} key={item._id} />)}
+        {itemsToDisplay.map((item) => (
+          <SOItem item={item} key={item._id} />
+        ))}
       </div>
     </div>
   );
