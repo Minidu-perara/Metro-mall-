@@ -20,6 +20,16 @@ const getAllItems = async (req, res) => {
   }
 };
 
+//get all item count
+const getItemCount=async(req,res)=>{
+  try {
+    const itemCount = await Item.countDocuments();
+    return res.json({ count: itemCount });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 //get single item details
 const getItem = async (req, res) => {
   try {
@@ -70,4 +80,4 @@ const updateItem = async (req, res) => {
   }
 };
 
-module.exports = { createItem, getAllItems, getItem, deleteItem, updateItem };
+module.exports = { createItem, getAllItems, getItem, deleteItem, updateItem ,getItemCount};
