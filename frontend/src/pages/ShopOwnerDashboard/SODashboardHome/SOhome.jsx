@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./SOhome.css";
 import Piechart from "./piechart/Piechart";
 import TotalItems from "../../../assets/Images/sodashboard/totalItems.png";
 import TotalPreOrders from "../../../assets/Images/sodashboard/totalPreorders.png";
 import TotalCompleteOrders from "../../../assets/Images/sodashboard/totalCompleteorders.png";
+import axios from "axios";
 
 function SOhome() {
+  const [itemCount, setItemCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchItemCount() {
+      try {
+        const res = await axios.get("/api/item/getItemCount");
+        const data = res.data.count;
+        setItemCount(data);
+      } catch (error) {
+        console.error("Error fetching customer count: ", error);
+      }
+    }
+    fetchItemCount();
+  }, []);
+
   return (
     <div className="sohome">
       {/* first row */}
@@ -20,7 +36,7 @@ function SOhome() {
           </div>
           <div className="first-card-details">
             <p>Total Items</p>
-            <p>10</p>
+            <p>{itemCount}</p>
           </div>
         </div>
         <div className="second-card">

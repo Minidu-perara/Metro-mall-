@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import "./Piechart.css";
+import axios from "axios";
 
 function Piechart() {
+  const [itemCount, setItemCount] = useState(0);
+
+  useEffect(() => {
+    axios.get("/api/item/getItemCount").then((response) => {
+      setItemCount(response.data.count);
+    });
+  }, []);
+
   const data = [
-    { name: "Total Items", value: 10 },
+    { name: "Total Items", value: itemCount },
     { name: "Total Pre Orders", value: 10 },
     { name: "Total Complete Orders", value: 10 },
   ];
