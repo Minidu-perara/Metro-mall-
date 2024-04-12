@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 
 const preOrderSchema = mongoose.Schema(
   {
+    status: {
+      type: String,
+      enum: ["pending", "completed"],
+      default: "pending",
+      required: true,
+    },
     item: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Items",
-      required: true,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
       required: true,
     },
   },

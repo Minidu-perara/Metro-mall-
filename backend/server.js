@@ -9,9 +9,11 @@ app.use(cors());
 
 //import routes
 const itemRoutes = require("./routes/item.route.js");
+const preOrderRoute = require("./routes/preOrder.route.js");
 
 //routes
 app.use("/api/item", itemRoutes);
+app.use("/api/preOrder", preOrderRoute);
 
 const PORT = process.env.PORT || 6000;
 
