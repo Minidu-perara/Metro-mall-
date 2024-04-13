@@ -5,17 +5,25 @@ import axios from "axios";
 
 function Piechart() {
   const [itemCount, setItemCount] = useState(0);
+  const [pendingCount, setpendingCount] = useState(0);
+  const [completeCount, setcompleteCount] = useState(0);
 
   useEffect(() => {
     axios.get("/api/item/getItemCount").then((response) => {
       setItemCount(response.data.count);
     });
+    axios.get("/api/preOrder/pendingOrderCount").then((response) => {
+      setpendingCount(response.data.count);
+    });
+    axios.get("/api/preOrder/completedOrderCount").then((response) => {
+      setcompleteCount(response.data.count);
+    });
   }, []);
 
   const data = [
     { name: "Total Items", value: itemCount },
-    { name: "Total Pre Orders", value: 10 },
-    { name: "Total Complete Orders", value: 10 },
+    { name: "Total Pre Orders", value: pendingCount },
+    { name: "Total Complete Orders", value: completeCount },
   ];
 
   const COLORS = [

@@ -8,6 +8,8 @@ import axios from "axios";
 
 function SOhome() {
   const [itemCount, setItemCount] = useState(0);
+  const [pendingCount, setpendingCount] = useState(0);
+  const [completeCount, setcompleteCount] = useState(0);
 
   useEffect(() => {
     async function fetchItemCount() {
@@ -20,6 +22,32 @@ function SOhome() {
       }
     }
     fetchItemCount();
+  }, []);
+
+  useEffect(() => {
+    async function fetchpendingCount() {
+      try {
+        const res = await axios.get("/api/preOrder/pendingOrderCount");
+        const data = res.data.count;
+        setpendingCount(data);
+      } catch (error) {
+        console.error("Error fetching customer count: ", error);
+      }
+    }
+    fetchpendingCount();
+  }, []);
+
+  useEffect(() => {
+    async function fetchcompleteCount() {
+      try {
+        const res = await axios.get("/api/preOrder/completedOrderCount");
+        const data = res.data.count;
+        setcompleteCount(data);
+      } catch (error) {
+        console.error("Error fetching customer count: ", error);
+      }
+    }
+    fetchcompleteCount();
   }, []);
 
   return (
@@ -48,8 +76,8 @@ function SOhome() {
             />
           </div>
           <div className="second-card-details">
-            <p>Total Pre Orders</p>
-            <p>10</p>
+            <p>Total Pending Orders</p>
+            <p>{pendingCount}</p>
           </div>
         </div>
       </div>
@@ -68,7 +96,7 @@ function SOhome() {
           </div>
           <div className="third-card-details">
             <p>Total Complete Orders</p>
-            <p>10</p>
+            <p>{completeCount}</p>
           </div>
         </div>
       </div>

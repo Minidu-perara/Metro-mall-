@@ -163,6 +163,12 @@ function SOPreorders() {
       align: "center",
     },
     {
+      title: "Price",
+      dataIndex: ["item", "price"],
+      key: "itemName",
+      align: "center",
+    },
+    {
       title: "Remaining Time",
       dataIndex: "remainingTime",
       key: "remainingTime",
