@@ -114,6 +114,7 @@ const updateStatus = async (req, res) => {
   }
 };
 
+//het pending order count
 const pendingOrderCount = async (req, res) => {
   try {
     const pendingOrderCount = await PreOrder.countDocuments({
@@ -126,6 +127,7 @@ const pendingOrderCount = async (req, res) => {
   }
 };
 
+//get complete order count
 const completedOrderCount = async (req, res) => {
   try {
     const completedOrderCount = await PreOrder.countDocuments({
@@ -138,6 +140,9 @@ const completedOrderCount = async (req, res) => {
   }
 };
 
+//automaticaly delete pending orders after 48 hours
+
+
 module.exports = {
   addPreOrder,
   getAllPreOrders,
@@ -147,5 +152,5 @@ module.exports = {
   getCompletedPreOrders,
   updateStatus,
   pendingOrderCount,
-  completedOrderCount,
+  completedOrderCount
 };

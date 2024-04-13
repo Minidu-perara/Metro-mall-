@@ -9,7 +9,7 @@ const {
   getCompletedPreOrders,
   updateStatus,
   pendingOrderCount,
-  completedOrderCount,
+  completedOrderCount
 } = require("../controllers/preOrder.controller");
 
 router.post("/addPreOrder", addPreOrder);
