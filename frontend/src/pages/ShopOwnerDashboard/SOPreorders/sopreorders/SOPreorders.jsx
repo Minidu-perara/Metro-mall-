@@ -93,6 +93,43 @@ function SOPreorders() {
     });
   };
 
+  //complete orders
+  const handleComplete = async (orderId) => {
+    // Show confirmation modal using SwalFire
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to mark this item as completed.",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, mark it as completed!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Send PUT request to update status to "completed"
+          const response = await axios.patch(
+            `/api/preOrder/updateStatus/${orderId}`
+          );
+          if (response.status === 200) {
+            // Show success message using SwalFire
+            Swal.fire(
+              "Completed!",
+              "Your item has been marked as completed.",
+              "success"
+            ).then(() => {
+              window.location.reload();
+            });
+          }
+        } catch (error) {
+          console.error("Error updating status:", error);
+          // Show error message using SwalFire
+          Swal.fire("Error!", "Failed to mark item as completed.", "error");
+        }
+      }
+    });
+  };
+
   //search pre orders
   const handleSearch = (event) => {
     const searchQuery = event.target.value.toLowerCase();
@@ -181,7 +218,12 @@ function SOPreorders() {
       align: "center",
       render: (text, record) => (
         <div className="tbl-btn">
-          <Button className="complete-btn">Complete</Button>
+          <Button
+            className="complete-btn"
+            onClick={() => handleComplete(record._id)}
+          >
+            Complete
+          </Button>
           <Button
             className="delete-btn"
             onClick={() => handleDelete(record._id)}
