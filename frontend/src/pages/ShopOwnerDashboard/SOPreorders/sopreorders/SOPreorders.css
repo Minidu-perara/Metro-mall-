@@ -23,6 +23,7 @@
   width: 100px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .SOPreorders .body-sec {

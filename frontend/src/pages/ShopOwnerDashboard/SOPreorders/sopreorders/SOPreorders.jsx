@@ -1,49 +1,173 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SOPreorders.css";
 import { Table, Button } from "antd";
+import axios from "axios";
+import Swal from "sweetalert2";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import logo from "../../../../assets/Images/sodashboard/pdflogo.png";
 
 function SOPreorders() {
-  // Sample data for the table
-  const data = [
-    {
-      key: "1",
-      itemName: "Chicken Burger",
-      customerName: "Kumara Silva",
-      Time: "10:50:12",
-    },
-    {
-      key: "2",
-      itemName: "Chicken Burger",
-      customerName: "Kumara Silva",
-      Time: "10:50:12",
-    },
-    {
-      key: "3",
-      itemName: "Chicken Burger",
-      customerName: "Kumara Silva",
-      Time: "10:50:12",
-    },
-  ];
+  const [preOrders, setPreOrders] = useState([]);
+  const [remainingTimes, setRemainingTimes] = useState({});
+  const [filteredItems, setFilteredItems] = useState([]);
 
-  // Columns configuration for the table
+  //fetch pre orders
+  useEffect(() => {
+    async function fetchpreOrders() {
+      try {
+        const response = await axios.get("/api/preOrder/getPendingPreOrders");
+        setPreOrders(response.data);
+        startTimers(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchpreOrders();
+  }, []);
+
+  //get reamainig time
+  const startTimers = (preOrders) => {
+    const timers = {};
+    preOrders.forEach((order) => {
+      timers[order._id] = setInterval(() => {
+        const addedTime = new Date(order.createdAt).getTime();
+        const currentTime = new Date().getTime();
+        const difference = 48 * 60 * 60 * 1000 - (currentTime - addedTime);
+
+        if (difference <= 0) {
+          clearInterval(timers[order._id]);
+          setRemainingTimes((prevRemainingTimes) => ({
+            ...prevRemainingTimes,
+            [order._id]: "Expired",
+          }));
+        } else {
+          const hours = Math.floor(difference / (1000 * 60 * 60));
+          const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          setRemainingTimes((prevRemainingTimes) => ({
+            ...prevRemainingTimes,
+            [order._id]: `${hours.toString().padStart(2, "0")} : ${minutes
+              .toString()
+              .padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`,
+          }));
+        }
+      }, 1000);
+    });
+  };
+
+  //delete preorders
+  const handleDelete = async (orderId) => {
+    // Show confirmation modal using SwalFire
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to delete this item.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `/api/preOrder/deletePreOrder/${orderId}`
+          );
+          if (response.status === 200) {
+            // Show success message using SwalFire
+            Swal.fire(
+              "Canceled!",
+              "Your item has been deleted.",
+              "success"
+            ).then(() => {
+              window.location.reload();
+            });
+          }
+        } catch (error) {
+          console.error("Error deleting item:", error);
+        }
+      }
+    });
+  };
+
+  //search pre orders
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    const filteredItems = preOrders.filter((preOrder) => {
+      return preOrder.item.itemName.toLowerCase().includes(searchQuery);
+    });
+    setFilteredItems(filteredItems);
+  };
+
+  const itemsToDisplay = filteredItems.length > 0 ? filteredItems : preOrders;
+
+  //pdf function
+  const pdfDownload = () => {
+    const doc = new jsPDF();
+
+    const headers = [["NO", "Item Name", "Price", "Status", "Remaining Time"]];
+
+    //map the data into the table
+    const data = preOrders.map((preOrder, index) => [
+      index + 1,
+      preOrder.item.itemName,
+      preOrder.item.price,
+      preOrder.status,
+      remainingTimes[preOrder._id],
+    ]);
+
+    //add the table into pdf
+    doc.autoTable({
+      head: headers,
+      body: data,
+      startY: 70,
+      styles: {
+        halign: "center",
+        valign: "middle",
+        cellPadding: 3,
+      },
+      headStyles: {
+        fillColor: [3, 17, 68], // Background color for table headers
+        textColor: [255, 255, 255], // Text color for table headers (optional)
+        fontSize: 10,
+      },
+      bodyStyles: {
+        fillColor: [255, 255, 255], // Background color for table body (data)
+        fontSize: 9,
+      },
+    });
+
+    doc.addImage(logo, "JPEG", 12, 20, 30, 30);
+
+    doc.setFontSize(14);
+    doc.text("Item List", 85, 65);
+    doc.setFontSize(9);
+    doc.text("Metro Mall", 155, 30);
+    doc.text("No 590, Galle Road", 155, 35);
+    doc.text("Colombo 03", 155, 40);
+    doc.text("metromall@gmail.com", 155, 45);
+    doc.text("011 2123 123", 155, 50);
+
+    //save the pdf with file name
+    doc.save("preOrders.pdf");
+  };
+
   const columns = [
     {
       title: "Item Name",
-      dataIndex: "itemName",
+      dataIndex: ["item", "itemName"],
       key: "itemName",
       align: "center",
     },
     {
-      title: "Customer",
-      dataIndex: "customerName",
-      key: "customerName",
+      title: "Remaining Time",
+      dataIndex: "remainingTime",
+      key: "remainingTime",
       align: "center",
-    },
-    {
-      title: "Time Count",
-      dataIndex: "Time",
-      key: "Time",
-      align: "center",
+      render: (_, record) => remainingTimes[record._id],
     },
     {
       title: "Action",
@@ -52,7 +176,12 @@ function SOPreorders() {
       render: (text, record) => (
         <div className="tbl-btn">
           <Button className="complete-btn">Complete</Button>
-          <Button className="delete-btn">Delete</Button>
+          <Button
+            className="delete-btn"
+            onClick={() => handleDelete(record._id)}
+          >
+            Delete
+          </Button>
         </div>
       ),
     },
@@ -62,19 +191,25 @@ function SOPreorders() {
     <div className="SOPreorders">
       <div className="head-section">
         <div className="srch-export">
-          <input type="text" placeholder="Search" />
-          <button>Export</button>
+          <input
+            type="text"
+            placeholder="Search"
+            name="searchQuery"
+            onChange={handleSearch}
+          />
+          <button onClick={pdfDownload}>Export</button>
         </div>
       </div>
       {/* body */}
       <div className="body-sec">
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={itemsToDisplay}
           pagination={{ pageSize: 5 }}
           footer={() => (
-            <div className="footer-number">{`Total ${data.length} items`}</div>
+            <div className="footer-number">{`Total ${preOrders.length} items`}</div>
           )}
+          rowKey={(record) => record._id}
         />
       </div>
     </div>
