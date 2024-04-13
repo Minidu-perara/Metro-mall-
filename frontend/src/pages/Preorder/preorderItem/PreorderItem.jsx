@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./PreorderItem.css";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function PreorderItem({ preOrder }) {
   const [remainingTime, setRemainingTime] = useState(getRemainingTime());
@@ -28,6 +30,39 @@ function PreorderItem({ preOrder }) {
     return { hours, minutes, seconds };
   }
 
+  const handleDelete = async () => {
+    // Show confirmation modal using SwalFire
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to cancel this item.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `/api/preOrder/deletePreOrder/${preOrder._id}`
+          );
+          if (response.status === 200) {
+            // Show success message using SwalFire
+            Swal.fire(
+              "Canceled!",
+              "Your item has been cenceled.",
+              "success"
+            ).then(() => {
+              window.location.reload();
+            });
+          }
+        } catch (error) {
+          console.error("Error deleting item:", error);
+        }
+      }
+    });
+  };
+
   return (
     <div className="preorder-item">
       <div className="po-card">
@@ -54,7 +89,9 @@ function PreorderItem({ preOrder }) {
               .padStart(2, "0")}`}</h4>
           </div>
           <div className="po-cancelbtn">
-            <button className="c-btn">Cancel</button>
+            <button className="c-btn" onClick={handleDelete}>
+              Cancel
+            </button>
           </div>
         </div>
       </div>
