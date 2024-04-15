@@ -20,7 +20,7 @@ function PreorderItem({ preOrder }) {
     const difference = 48 * 60 * 60 * 1000 - (currentTime - addedTime);
 
     if (difference <= 0) {
-      return { hours: 0, minutes: 0, seconds: 0 };
+      return "Expired";
     }
 
     const hours = Math.floor(difference / (1000 * 60 * 60));
@@ -80,13 +80,17 @@ function PreorderItem({ preOrder }) {
         </div>
         <div className="third-section">
           <div className="remain-time">
-            <h4>{`${remainingTime.hours
-              .toString()
-              .padStart(2, "0")} : ${remainingTime.minutes
-              .toString()
-              .padStart(2, "0")} : ${remainingTime.seconds
-              .toString()
-              .padStart(2, "0")}`}</h4>
+            <h4>
+              {typeof remainingTime === "string"
+                ? remainingTime
+                : `${remainingTime.hours
+                    .toString()
+                    .padStart(2, "0")} : ${remainingTime.minutes
+                    .toString()
+                    .padStart(2, "0")} : ${remainingTime.seconds
+                    .toString()
+                    .padStart(2, "0")}`}
+            </h4>
           </div>
           <div className="po-cancelbtn">
             <button className="c-btn" onClick={handleDelete}>
