@@ -51,9 +51,9 @@ const FoodDescription = () => {
 
         <div className="descriptionContainer">
           <LocationOnIcon style={{ height: 40, width: 40 }} />
-          <h2>{`${location}, METRO MALL, COLOMBO`}</h2>
+          <h3 style={{fontWeight:600}}>{`${location}, METRO MALL, COLOMBO`}</h3>
         </div>
-
+        <br />
         <p className="paragraphcontainer">{description}</p>
       </div>
     </div>

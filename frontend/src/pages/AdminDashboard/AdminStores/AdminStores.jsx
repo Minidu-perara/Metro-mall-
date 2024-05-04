@@ -152,7 +152,6 @@ const stores = () => {
           <th>Store Name</th>
           <th>Location</th>
           <th>Category</th>
-          <th>Image</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -161,7 +160,6 @@ const stores = () => {
             <td>{store.storeName}</td>
             <td>{store.location}</td>
             <td>{store.category}</td>
-            <td><img style={{width:50, height:50}} src={`/uploads/${store.storeImage}`} /></td>
             <td>
               <Link to={`/admindashboard/stores/update/${store._id}`}>
                 <button className="EditButton">Edit</button>

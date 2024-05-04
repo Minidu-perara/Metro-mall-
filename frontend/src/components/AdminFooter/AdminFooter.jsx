@@ -3,8 +3,8 @@ import "./AdminFooter.css";
 
 const AdminFooter = () => {
   return (
-    <div className="footer">
-      <div className="bottom">
+    <div className="Adminfooter">
+      <div className="Adminbottom">
         Copyright © 2024 MetroMall. All Right Reserved
       </div>
     </div>

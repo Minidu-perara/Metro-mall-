@@ -1,4 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation  } from "react-router-dom";
+import { ToastContainer} from 'react-toastify';
+
 import DashboardLayout from "./pages/AdminDashboard/DashboardLayout";
 import AdminHeader from "./components/AdminHeader/AdminHeader";
 import DashboardHome from "./pages/AdminDashboard/DashboardHome/DashboardHome";
@@ -8,19 +10,25 @@ import UpdateStores from "./pages/AdminDashboard/AdminStores/UpdateStores";
 import FoodBeverages from "./pages/FoodBeveragesPage/FoodBeverages";
 import FoodDescription from "./pages/FoodBeveragesPage/FoodDescription";
 import AdminFooter from "./components/AdminFooter/AdminFooter";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import ClientHeader from "./components/ClientHeader/ClientHeader";
+import ClientFooter from "./components/ClinetFooter/ClientFooter";
+import About from "./pages/about/About";
+import Parkingpage from "./pages/Parkingpage/Parkingpage";
+import ContactUs from "./pages/ContactUs/ContactUs";
+import HomePage from "./pages/HomePage/HomePage";
 
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 
-
-
-
 function App() {
+  const location = useLocation();
+  const isAdminDashboard = location.pathname.startsWith('/admindashboard');
+  const isClientDashboard = !isAdminDashboard;
+
   return (
     <div>
-      <AdminHeader/>
+      {isAdminDashboard ? <AdminHeader /> : <ClientHeader />}
       <ToastContainer/>
       <Routes>
         <Route path="/admindashboard" element={<DashboardLayout component={<DashboardHome />} />} />
@@ -29,8 +37,13 @@ function App() {
         <Route path="/admindashboard/stores/update/:id" element={<DashboardLayout component={<UpdateStores />} />} />
         <Route path="/foodbeverages" element={<FoodBeverages/>} />
         <Route path="/fooddescription/:id" element={<FoodDescription/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/parking" element={<Parkingpage/>} />
+        <Route path="/contactus" element={<ContactUs/>} />
+        <Route path="/home" element={<HomePage/>} />
       </Routes>
-     <AdminFooter/>
+      {isAdminDashboard && <AdminFooter />}
+      {isClientDashboard && <ClientFooter />}
     </div>
   );
 }

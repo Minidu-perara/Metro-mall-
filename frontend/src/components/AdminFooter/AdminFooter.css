@@ -1,4 +1,4 @@
-.footer {
+.Adminfooter {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     padding: 0;
   }
   
-  .bottom {
+  .Adminbottom {
     text-align: center;
     display: flex;
     align-items: center;
