@@ -10,7 +10,7 @@ function AdminHeader() {
         <h1 className='headername'>METRO MALL</h1>
       </div>
       <div> 
-      <AccountCircleIcon style={{ fontSize: 40, width: 40, height: 40 }}/>
+      <AccountCircleIcon style={{ fontSize: 35, width: 35, height: 35 }}/>
       </div>
     </div>
   )

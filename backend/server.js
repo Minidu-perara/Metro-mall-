@@ -12,12 +12,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+//import routes
+const itemRoutes = require("./routes/item.route.js");
+const preOrderRoute = require("./routes/preOrder.route.js");
 
 //routes
-const StoreRouter = require("./routes/store.routes");
-
-//api
-app.use("/api/store",StoreRouter);
+app.use("/api/item", itemRoutes);
+app.use("/api/preOrder", preOrderRoute);
 
 
 const PORT = process.env.PORT || 8000;

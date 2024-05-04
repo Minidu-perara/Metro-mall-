@@ -8,8 +8,7 @@ const DashboardLayout = (props) => {
     <div className="outsideStyle">
 
       <Adminsidemenu />
-      <div className="innersideStyle">{props.component}</div>
-
+    <div className="innersideStyle">{props.component}</div>
     </div>
   );
 };
