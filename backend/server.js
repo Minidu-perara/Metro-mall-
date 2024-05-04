@@ -1,19 +1,28 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
+const bodyParser = require("body-parser");
 const cors = require("cors");
-const { connectDB } = require("./utils/connection.js");
-
+const dotenv = require("dotenv");
 const app = express();
+require("dotenv").config();
+const {connectDB} = require("./utils/connection");
+
+
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(cors());
 
-//import routes
 
 //routes
+const StoreRouter = require("./routes/store.routes");
 
-const PORT = process.env.PORT || 6000;
+//api
+app.use("/api/store",StoreRouter);
 
-app.listen(PORT, () => {
-  console.log(`😎 app is running on ${PORT}`);
-  connectDB();
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT,() => {
+    console.log(`😎 Server is running on port ${PORT}`);
+    connectDB();
 });
+

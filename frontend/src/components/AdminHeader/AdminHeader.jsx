@@ -1,13 +1,13 @@
 import React from 'react';
-import "./header.css";
+import "./AdminHeader.css";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { height } from '@mui/system';
 
-function Header() {
+
+function AdminHeader() {
   return (
     <div className='header'>
       <div className='logo'>
-        <h1>METRO MALL</h1>
+        <h1 className='headername'>METRO MALL</h1>
       </div>
       <div> 
       <AccountCircleIcon style={{ fontSize: 40, width: 40, height: 40 }}/>
@@ -16,4 +16,4 @@ function Header() {
   )
 }
 
-export default Header
+export default AdminHeader
